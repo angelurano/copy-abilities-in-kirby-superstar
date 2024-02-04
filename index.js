@@ -40,8 +40,7 @@ const btnRightImage = document.getElementById("btnRightImage");
 
 // Functions for move the selector
 
-const moveSelector = ({ direction /* , indexToMove = undefined */ }) => {
-    // TODO: indexToMove centra el selector cerca de ese index
+const moveSelector = ({ direction, indexElement = undefined }) => {
     const widthScroll = ulSelector.scrollWidth;
     const currentScrollLeft = ulSelector.scrollLeft;
 
@@ -50,7 +49,10 @@ const moveSelector = ({ direction /* , indexToMove = undefined */ }) => {
 
     let newScrollPosition = 0;
 
-    if (direction === "right") {
+    if (indexElement !== undefined) {
+        actualMenuSelectorIndex = Math.floor(indexElement / itemsInSelector);
+        newScrollPosition = actualMenuSelectorIndex * movementWidth - 1;
+    } else if (direction === "right") {
         if (currentScrollLeft + movementWidth + 1 < widthScroll) {
             newScrollPosition = currentScrollLeft + movementWidth;
             actualMenuSelectorIndex++;
@@ -75,7 +77,8 @@ const moveSelector = ({ direction /* , indexToMove = undefined */ }) => {
     return {
         changeImage: () =>
             changeSelectedImage(
-                (actualMenuSelectorIndex + 1) * itemsInSelector - (direction === "right" ? 3 : 1)
+                (actualMenuSelectorIndex + 1) * itemsInSelector -
+                    (direction === "right" ? 3 : 1)
             ),
     };
 };
@@ -101,10 +104,9 @@ const changeSelectedImage = index => {
     selectedImage.title = text;
     selectedImageTitle.textContent = element.description;
 
-    selectorImages[actualImageIndex].classList.remove('selectedInSelector');
-    console.log()
+    selectorImages[actualImageIndex].classList.remove("selectedInSelector");
     actualImageIndex = index;
-    selectorImages[actualImageIndex].classList.add('selectedInSelector');
+    selectorImages[actualImageIndex].classList.add("selectedInSelector");
     interval = setInterval(moveRightImage, intervalTime);
 };
 
@@ -163,15 +165,13 @@ const createSelectorImage = (element, index) => {
 };
 
 const printImages = data => {
-    // TODO: cambiar el primer index por uno random, el selector debe centrarse en el
-    const firstImageIndex = Math.floor(Math.random() * data.length);
     data.forEach((element, index) => {
         createSelectorImage(element, index);
-        if (index === 0) {
-            changeSelectedImage(index);
-            selectedImageTitle.classList.add("selectedImageTitle");
-        }
     });
+    const firstImageIndex = Math.floor(Math.random() * data.length);
+    changeSelectedImage(firstImageIndex);
+    selectedImageTitle.classList.add("selectedImageTitle");
+    moveSelector({ indexElement: firstImageIndex });
 };
 
 fetchData().then(response => {
