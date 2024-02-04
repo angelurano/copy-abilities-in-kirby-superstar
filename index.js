@@ -1,3 +1,4 @@
+// Fetch data
 const URL = "https://paman00.github.io/copy-abilities-in-kirby-superstar";
 const DATA_URL = `${URL}/lib/data.json`;
 
@@ -11,9 +12,13 @@ const fetchData = async () => {
     }
 };
 
+// Variables
+
 let actualImageIndex = 0;
 const itemsInSelector = 3;
 let actualMenuSelectorIndex = 0;
+
+// DOM elements
 
 const selectedImageDiv = document.getElementById("selectedImageDiv");
 const selectedImage = document.getElementById("selectedImage");
@@ -24,10 +29,14 @@ const ulSelector = document.getElementById("ulSelector");
 const btnSelectorLeft = document.getElementById("btnSelectorLeft");
 const btnSelectorRight = document.getElementById("btnSelectorRight");
 
-const moveSelector = ({ direction, indexToMove = undefined }) => {
-    const widthScroll = ulSelector.scrollWidth;
+const btnLeftImage = document.getElementById("btnLeftImage");
+const btnRightImage = document.getElementById("btnRightImage");
 
-    // const widthSingleElement = ulSelector.offsetWidth / itemsInSelector;
+// Functions for move the selector
+
+const moveSelector = ({ direction /* , indexToMove = undefined */ }) => {
+    // TODO: indexToMove centra el selector cerca de ese index
+    const widthScroll = ulSelector.scrollWidth;
     const currentScrollLeft = ulSelector.scrollLeft;
 
     const movementWidth =
@@ -73,7 +82,10 @@ const moveRightSelector = () =>
 btnSelectorLeft.addEventListener("click", moveLeftSelector);
 btnSelectorRight.addEventListener("click", moveRightSelector);
 
+// Functions for move the main image
+
 const changeSelectedImage = index => {
+    // TODO: añadir estilo al selector seleccionado
     const element = data[index];
 
     selectedImage.src = URL + element.image.src;
@@ -85,6 +97,32 @@ const changeSelectedImage = index => {
 
     actualImageIndex = index;
 };
+
+const moveLeftImage = () => {
+    changeSelectedImage(
+        actualImageIndex - 1 < 0 ? data.length - 1 : actualImageIndex - 1
+    );
+    if (
+        (actualImageIndex + 1) % itemsInSelector === 0 ||
+        actualImageIndex === data.length - 1
+    ) {
+        moveSelector({ direction: "left" });
+    }
+};
+
+const moveRightImage = () => {
+    changeSelectedImage(
+        actualImageIndex + 1 >= data.length ? 0 : actualImageIndex + 1
+    );
+    if (actualImageIndex % itemsInSelector === 0) {
+        moveSelector({ direction: "right" });
+    }
+};
+
+btnLeftImage.addEventListener("click", moveLeftImage);
+btnRightImage.addEventListener("click", moveRightImage);
+
+// Functions for generate the selectors
 
 const createSelectorImage = (element, index) => {
     const li = document.createElement("li");
@@ -113,6 +151,7 @@ const createSelectorImage = (element, index) => {
 };
 
 const printImages = data => {
+    // TODO: cambiar el primer index por uno random, el selector debe centrarse en el
     const firstImageIndex = Math.floor(Math.random() * data.length);
     data.forEach((element, index) => {
         if (index === 0) {
