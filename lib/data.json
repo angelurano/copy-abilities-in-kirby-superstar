@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Alas",
+        "description": "Con esta habilidad Kirby obtiene unas alas con las cueles puede volar y usar las plumas de estas como armas.",
+        "image": {
+            "src": "/images/KirbyAlas.png",
+            "game": "Kirby's Return to Dream Land"
+        }
+    },
+    {
+        "name": "Bomba",
+        "description": "Kirby obtiene la habilidad de hacer bombas las cuales puede lanzar, dejar en el suelo o colocárselas a los enemigos.",
+        "image": {
+            "src": "/images/KirbyBomba.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    }, 
+    {
+        "name": "Catapúm",
+        "description": "Kirby obtiene la habilidad de crear una gran explosión que destruye todo enemigo en la pantalla.",
+        "image": {
+            "src": "/images/KirbyCatapum.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    },
+    {
+        "name": "Cocinero",
+        "description": "Kirby puede sacar un caldero donde entraran todos los enemigos cercanos, después los cocinara y de el caldero saldrán ítems para recuperar vitalidad.",
+        "image": {
+            "src": "/images/KirbyCocinero.png",
+            "game": "Kirby Star Allies"
+        }
+    }, 
+    {
+        "name": "Copiar",
+        "description": "Esta habilidad le permite a Kirby copiar la habilidad de sus enemigos sin necesidad de tragarlos.",
+        "image": {
+            "src": "/images/KirbyCopia.png",
+            "game": "Kirby Super Star Ultra" 
+        }
+    }, 
+    {
+        "name": "Cuchillo",
+        "description": "Kirby puede usar la cuchilla de su casco para lanzarla hacia los enemigos para así eliminarlos.",
+        "image": {
+            "src": "/images/KirbyCuchillo.png",
+            "game": "Kirby's Return to Dream Land"
+        } 
+    },
+    {
+        "name": "Espada",
+        "description": "Kirby obtiene una espada con la cual puede atacar a sus enemigos.",
+        "image": {
+            "src": "/images/KirbyEspada.png",
+            "game": "Kirby Fighters 2"
+        }
+    },
+    {
+        "name": "Espejo",
+        "description": "Con esta habilidad Kirby obtiene un cetro con el cual puede crear espejos para defenderse y regresar ataques y además puede duplicarse para atacar.",
+        "image": {
+            "src": "/images/KirbyEspejo.png",
+            "game": "Kirby: Planet Robobot"
+        }
+    }, 
+    {
+        "name": "Fuego",
+        "description": "Kirby puede lanzar fuego desde su boca y si corre puede convertirse en un proyectil de fuego.",
+        "image": {
+            "src": "/images/KirbyFuego.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    }, 
+    {
+        "name": "Hielo",
+        "description": "Esta habilidad le permite a Kirby congelar todo aquel que se le acerque.",
+        "image": {
+            "src": "/images/KirbyHielo.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    },
+    {
+        "name": "Jet",
+        "description": "Kirby puede lanzarse a gran velocidad hacia los enemigos y además puede cargarse aun más para lanzarse a más velocidad.",
+        "image": {
+            "src": "/images/KirbyJet.png",
+            "game": "Kirby: Planet Robobot"
+        }
+    },
+    {
+        "name": "Luchador",
+        "description": "Kirby puede lanzar grandes ráfagas de golpes a sus enemigos para eliminarlos.",
+        "image": {
+            "src": "/images/KirbyLuchador.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    },
+    {
+        "name": "Martillo",
+        "description": "Kirby obtiene un martillo con el cual puede aplastar estacas y puede eliminar enemigos con el golpe del martillo.",
+        "image": {
+            "src": "/images/KirbyMartillo.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    },
+    {
+        "name": "Micro",
+        "description": "Kirby puede usar esta habilidad tres veces. En cada ocasión Kirby sacara un instrumento para gritar y con cada grito los enemigos de la pantalla serán eliminados.",
+        "image": {
+            "src": "/images/KirbyMicro.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    },
+    {
+        "name": "Ninja",
+        "description": "Kirby puede lanzar ataques de ninja y puede pegar se las paredes.",
+        "image": {
+            "src": "/images/KirbyNinja.png",
+            "game": "Kirby Fighters 2"
+        }
+    }, 
+    {
+        "name": "Piedra",
+        "description": "Con esta habilidad Kirby puede transformarse en diferentes cosas pesadas, como una piedra o una estatua.",
+        "image": {
+            "src": "/images/KirbyStone.png",
+            "game": "Kirby Super Star"
+        }
+    },
+    {
+        "name": "Pincel",
+        "description": "Esta habilidad especial sirve para vencer a los enemigos Langosta pesada y Camaleón. En ambos casos usara la habilidad para pintarlos.",
+        "image": {
+            "src": "/images/KirbyPincel.png",
+            "game": "Kirby Super Star Ultra"
+        }
+    },
+    {
+        "name": "Plasma",
+        "description": "Con esta habilidad, Kirby puede cargar energía para luego lanzarla rápidamente. Puede lanzar desde pequeñas cargas eléctricas hasta esferas de energía.",
+        "image": {
+            "src": "/images/KirbyPlasma.png",
+            "game": "Kirby Star Allies"
+        }
+    },
+    {
+        "name": "Rayo",
+        "description": "Kirby puede lanzar rayos desde su báculo, y, si carga energía, puede lanzar un ataque demoledor.",
+        "image": {
+            "src": "/images/KirbyRayo.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    },
+    {
+        "name": "Rueda",
+        "description": "Con esta habilidad Kirby se puede transformar en una rueda para avanzar más rápido.",
+        "image": {
+            "src": "/images/KirbyWheel.png",
+            "game": "Kirby: Nightmare in Dream Land"
+        }
+    },
+    {
+        "name": "Sombrilla",
+        "description": "Kirby obtiene una sombrilla que puede usar para descender lentamente y para atacar a los enemigos.",
+        "image": {
+            "src": "/images/KirbySombrilla.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    }, 
+    {
+        "name": "Sueño",
+        "description": "Con esta habilidad Kirby se pondrá a dormir y sera inmune a los ataque de los enemigos por un corto periodo de tiempo.",
+        "image": {
+            "src": "/images/KirbyDream.png",
+            "game": "Kirby's Return to Dream Land Deluxe"
+        }
+    },
+    {
+        "name": "Suplex",
+        "description": "Con esta habilidad Kirby puede coger a los enemigos y realizares técnicas de lucha libre para eliminarlos.",
+        "image": {
+            "src": "/images/KirbySuplex.png",
+            "game": "Kirby Super Star Ultra"
+        }
+    },
+    {
+        "name": "Yo-yo",
+        "description": "Con esta habilidad Kirby obtiene un yoyo con el cual puede atacar a sus enemigos por diferentes direcciones.",
+        "image": {
+            "src": "/images/KirbyYoyo.png",
+            "game": "Kirby Super Star Ultra"
+        }
+    }
+]
