@@ -1,4 +1,5 @@
-const DATA_URL = '/lib/data.json';
+const URL = 'https://paman00.github.io/copy-abilities-in-kirby-superstar';
+const DATA_URL = `${URL}/lib/data.json`;
 
 const fetchData = async () => {
     try {
@@ -44,7 +45,7 @@ const changeSelectedImage = (element) => {
     if(!selectedImageTitle.classList.contains('selectedImageTitle')) 
         selectedImageTitle.classList.add('selectedImageTitle');
     const text = `Kirby ${element.name} seleccionado, de ${element.image.game}`
-    selectedImage.src = element.image.src;
+    selectedImage.src = URL + element.image.src;
     selectedImage.title = text;
     selectedImage.alt = text;
     selectedImageTitle.textContent = element.description;
@@ -58,7 +59,7 @@ const createSelectorImage = (element) => {
 
     p.textContent = element.name;
 
-    img.src = element.image.src;
+    img.src = URL + element.image.src;
     const text = `Kirby ${element.name} de ${element.image.game}` 
     img.alt = text; 
     img.title = text;
