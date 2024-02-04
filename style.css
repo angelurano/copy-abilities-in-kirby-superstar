@@ -52,7 +52,7 @@ img {
 }
 
 .btnImage {
-    color: darkorange;
+    color: orangered;
     background-color: white;
     border-radius: 100%;
     position: absolute;
@@ -142,15 +142,43 @@ img {
     padding: 10px;
     cursor: pointer;
 
+    opacity: 0.7;
+
     transition: all 0.3s ease-in-out;
 }
 .ulSelector li:hover {
+    opacity: 1;
     transform: translateY(-10px);
 }
 .ulSelector figure {
+    z-index: 1;
     max-height: 80%;
 }
-
+.ulSelector p {
+    z-index: 1;
+}
+.selectedInSelector {
+    position: relative;
+    color: orangered;
+    opacity: 1 !important;
+    transform: translateY(-9px);
+}
+.selectedInSelector::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-45%);
+    height: 90%;
+    width: 100px;
+    z-index: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    color: black;
+    transition: all 2s ease-in-out;
+    animation: apareceAbajoArriba 0.3s ease-in-out;
+    box-shadow: 0 0 10px #ffffff;
+}
 .btnScroll {
     color: white;
     width: fit-content;
@@ -169,4 +197,16 @@ img {
     left: 0;
     padding-left: 0;
     padding-right: 10px;
+}
+
+@keyframes apareceAbajoArriba {
+    from {
+        transform: translateY(100%) translateX(-50%);
+    }
+    90% {
+        transform: translateY(-50%) translateX(-50%);
+    }
+    to {
+        transform: translateY(-40%) translateX(-50%);
+    }
 }

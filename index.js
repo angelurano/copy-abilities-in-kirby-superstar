@@ -14,6 +14,9 @@ const fetchData = async () => {
 
 // Variables
 
+let data;
+let selectorImages = {};
+
 let actualImageIndex = 0;
 const itemsInSelector = 3;
 let actualMenuSelectorIndex = 0;
@@ -72,7 +75,7 @@ const moveSelector = ({ direction /* , indexToMove = undefined */ }) => {
     return {
         changeImage: () =>
             changeSelectedImage(
-                (actualMenuSelectorIndex + 1) * itemsInSelector - 2
+                (actualMenuSelectorIndex + 1) * itemsInSelector - (direction === "right" ? 3 : 1)
             ),
     };
 };
@@ -88,7 +91,6 @@ btnSelectorRight.addEventListener("click", moveRightSelector);
 // Functions for move the main image
 
 const changeSelectedImage = index => {
-    // TODO: añadir estilo al selector seleccionado
     clearInterval(interval);
     const element = data[index];
 
@@ -99,7 +101,10 @@ const changeSelectedImage = index => {
     selectedImage.title = text;
     selectedImageTitle.textContent = element.description;
 
+    selectorImages[actualImageIndex].classList.remove('selectedInSelector');
+    console.log()
     actualImageIndex = index;
+    selectorImages[actualImageIndex].classList.add('selectedInSelector');
     interval = setInterval(moveRightImage, intervalTime);
 };
 
@@ -147,11 +152,13 @@ const createSelectorImage = (element, index) => {
     li.appendChild(figure);
     li.appendChild(p);
     li.id = `selectorImage-${index}`;
+
+    selectorImages[index] = li;
+
     ulSelector.appendChild(li);
     li.addEventListener("click", () => {
         changeSelectedImage(index);
     });
-
     return li;
 };
 
@@ -159,15 +166,14 @@ const printImages = data => {
     // TODO: cambiar el primer index por uno random, el selector debe centrarse en el
     const firstImageIndex = Math.floor(Math.random() * data.length);
     data.forEach((element, index) => {
+        createSelectorImage(element, index);
         if (index === 0) {
             changeSelectedImage(index);
             selectedImageTitle.classList.add("selectedImageTitle");
         }
-        createSelectorImage(element, index);
     });
 };
 
-let data;
 fetchData().then(response => {
     data = response;
     printImages(data);
