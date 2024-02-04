@@ -14,8 +14,8 @@ const fetchData = async () => {
 
 // Variables
 
-let data;
 let selectorImages = {};
+let data;
 
 let actualImageIndex = 0;
 const itemsInSelector = 3;

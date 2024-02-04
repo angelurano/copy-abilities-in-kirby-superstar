@@ -40,7 +40,7 @@ img {
     flex-flow: column nowrap;
     justify-content: space-between;
     padding: 50px;
-    background-color: #0261C0;
+    background-color: #0261c0;
     border-radius: 10px;
     box-shadow: 0 0 5px black;
 }
@@ -66,7 +66,7 @@ img {
     width: 40px;
     right: 10px;
     z-index: 3;
-    opacity: 0;
+    opacity: 0.7;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 0 10px #ffffff;
 }
@@ -75,10 +75,9 @@ img {
     right: auto;
 }
 .selectedImageDiv:hover .btnImage {
-    opacity: 0.7;
+    opacity: 1;
 }
 .btnImage:hover {
-    opacity: 1 !important;
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -101,14 +100,14 @@ img {
     left: 50%;
     top: 90%;
     padding: 10px;
-    border: 5px ;
+    border: 5px;
     transition: all 0.3s ease-in-out;
-    background-color: rgba(255, 255, 255, 0.5);     
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     transform: translateX(-50%);
     opacity: 0.5;
-    border-left: #0261C0 5px dashed;
-    border-right: #0261C0 5px dashed;
+    border-left: #0261c0 5px dashed;
+    border-right: #0261c0 5px dashed;
     color: #ffffff00;
 }
 .selectedImageDiv:hover .selectedImageTitle {
@@ -117,7 +116,7 @@ img {
 .selectedImageTitle:hover {
     bottom: 0px;
     top: auto;
-    color: black;     
+    color: black;
 }
 .selectedImageDiv figure {
     background-color: #ffffffe0;
@@ -182,7 +181,7 @@ img {
     transform: translateY(-9px);
 }
 .selectedInSelector::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
