@@ -17,6 +17,9 @@ const fetchData = async () => {
 let actualImageIndex = 0;
 const itemsInSelector = 3;
 let actualMenuSelectorIndex = 0;
+let interval;
+
+const intervalTime = 5000;
 
 // DOM elements
 
@@ -86,6 +89,7 @@ btnSelectorRight.addEventListener("click", moveRightSelector);
 
 const changeSelectedImage = index => {
     // TODO: añadir estilo al selector seleccionado
+    clearInterval(interval);
     const element = data[index];
 
     selectedImage.src = URL + element.image.src;
@@ -96,6 +100,7 @@ const changeSelectedImage = index => {
     selectedImageTitle.textContent = element.description;
 
     actualImageIndex = index;
+    interval = setInterval(moveRightImage, intervalTime);
 };
 
 const moveLeftImage = () => {
