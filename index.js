@@ -168,6 +168,8 @@ const printImages = data => {
     data.forEach((element, index) => {
         createSelectorImage(element, index);
     });
+    document.documentElement.style.setProperty('--elements', data.length);
+    document.documentElement.style.setProperty('--itemsInSelector', itemsInSelector);
     const firstImageIndex = Math.floor(Math.random() * data.length);
     changeSelectedImage(firstImageIndex);
     selectedImageTitle.classList.add("selectedImageTitle");
