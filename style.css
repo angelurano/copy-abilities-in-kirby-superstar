@@ -166,7 +166,7 @@ a:hover {
 /* buttons image */
 .btnImage {
     background-color: white;
-    color: orangered;
+    color: #ff4500;
     box-shadow: 0 0 10px #ffffff;
     border-radius: 100%;
     position: absolute;
@@ -204,7 +204,13 @@ a:hover {
     right: 10px;
     transform: translateY(0);
 }
-.btnRandomImage:hover {
+.btnPauseImage {
+    top: 10px;
+    right: 50px;
+    transform: translateY(0);
+}
+.btnRandomImage:hover,
+.btnPauseImage:hover {
     transform: translateY(0) scale(1.1);
 }
 .selectedImageDiv:hover .btnImage {
@@ -355,6 +361,25 @@ a:hover {
     }
     .selectedImageTitle:hover::before {
         transform: translateY(-55%) translateX(-50%) rotate(90deg);
+    }
+    .selectedImageTitle::before,
+    .btnImage {
+        height: 40px;
+        width: 40px;
+    }
+    .btnLeftImage {
+        left: 20px;
+    }
+    .btnRightImage {
+        right: 20px;
+    }
+    .btnRandomImage {
+        top: 20px;
+        right: 20px;
+    }
+    .btnPauseImage {
+        top: 20px;
+        right: 70px;
     }
 }
 

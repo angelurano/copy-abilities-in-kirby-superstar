@@ -22,7 +22,7 @@ const itemsInSelector = 3;
 let actualMenuSelectorIndex = 0;
 let interval;
 
-const intervalTime = 5000;
+const intervalTimeInMilliseconds = 10000;
 
 // DOM elements
 
@@ -38,6 +38,7 @@ const btnSelectorRight = document.getElementById("btnSelectorRight");
 const btnLeftImage = document.getElementById("btnLeftImage");
 const btnRightImage = document.getElementById("btnRightImage");
 
+const btnPauseImage = document.getElementById("btnPauseImage");
 const btnRandomImage = document.getElementById("btnRandomImage");
 
 // Functions for move the selector
@@ -102,7 +103,7 @@ const changeSelectedImage = index => {
     selectorImages[actualImageIndex].classList.remove("selectedInSelector");
     actualImageIndex = index;
     selectorImages[actualImageIndex].classList.add("selectedInSelector");
-    interval = setInterval(moveRightImage, intervalTime);
+    resetInterval();
 };
 
 const moveLeftImage = () => {
@@ -128,6 +129,34 @@ const moveRightImage = () => {
 
 btnLeftImage.addEventListener("click", moveLeftImage);
 btnRightImage.addEventListener("click", moveRightImage);
+
+const stopInterval = () => {
+    clearInterval(interval);
+    interval = null;
+};
+
+const startInterval = () => {
+    moveRightImage();
+};
+
+const resetInterval = () => {
+    btnPauseImage.children[0].alt = "Stop";
+    btnPauseImage.children[0].src = "/images/svg/stop.svg";
+    stopInterval();
+    interval = setInterval(moveRightImage, intervalTimeInMilliseconds);
+};
+
+btnPauseImage.addEventListener("click", () => {
+    if (interval) {
+        btnPauseImage.children[0].alt = "Play";
+        btnPauseImage.children[0].src = "/images/svg/play.svg";
+        stopInterval();
+    } else {
+        btnPauseImage.children[0].alt = "Stop";
+        btnPauseImage.children[0].src = "/images/svg/stop.svg";
+        startInterval();
+    }
+});
 
 const changeToRandomImage = () => {
     const indexElement = Math.floor(Math.random() * data.length);

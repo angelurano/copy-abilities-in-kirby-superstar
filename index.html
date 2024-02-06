@@ -11,7 +11,7 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="style.css" />
-        <script src="index.js" defer></script>
+        <script src="index.js" type="module" defer></script>
     </head>
     <body>
         <main class="main" id="main">
@@ -20,16 +20,19 @@
                 <span class="red">Kirby Super Star</span>
             </h1>
             <div id="selectedImageDiv" class="selectedImageDiv">
-                <button class="btnImage btnRandomImage" id="btnRandomImage">
-                    <img src="images/svg/shuffleRandom.svg" alt="Random" />
-                </button>
-                <button class="btnImage btnLeftImage" id="btnLeftImage">
-                    <
-                </button>
                 <p id="selectedImageTitle" class="">Cargando...</p>
                 <figure>
                     <img id="selectedImage" class="selectedImage" />
                 </figure>
+                <button class="btnImage btnRandomImage" id="btnRandomImage">
+                    <img src="images/svg/shuffleRandom.svg" alt="Random" />
+                </button>
+                <button class="btnImage btnPauseImage" id="btnPauseImage">
+                    <img src="images/svg/stop.svg" alt="Stop">
+                </button>
+                <button class="btnImage btnLeftImage" id="btnLeftImage">
+                    <
+                </button>
                 <button class="btnImage btnRightImage" id="btnRightImage">
                     >
                 </button>
