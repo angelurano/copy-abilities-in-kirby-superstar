@@ -39,43 +39,36 @@ const btnLeftImage = document.getElementById("btnLeftImage");
 const btnRightImage = document.getElementById("btnRightImage");
 
 // Functions for move the selector
-
-const moveSelector = ({ direction, indexElement = undefined }) => {
-    const widthScroll = ulSelector.scrollWidth;
-    const currentScrollLeft = ulSelector.scrollLeft;
-
+const getNewScrollPosition = () => {
     const movementWidth =
         (ulSelector.offsetWidth / itemsInSelector) * itemsInSelector;
+    return actualMenuSelectorIndex * movementWidth - 1;
+};
 
-    let newScrollPosition = 0;
-
-    if (indexElement !== undefined) {
+const moveSelector = ({ direction, indexElement = -1 }) => {
+    if (indexElement !== -1) {
         actualMenuSelectorIndex = Math.floor(indexElement / itemsInSelector);
-        newScrollPosition = actualMenuSelectorIndex * movementWidth - 1;
     } else if (direction === "right") {
-        if (currentScrollLeft + movementWidth + 1 < widthScroll) {
-            newScrollPosition = currentScrollLeft + movementWidth;
+        if (actualMenuSelectorIndex + 1 < data.length / itemsInSelector) {
             actualMenuSelectorIndex++;
         } else {
-            newScrollPosition = 0;
             actualMenuSelectorIndex = 0;
         }
     } else if (direction === "left") {
-        if (currentScrollLeft - movementWidth + 1 >= 0) {
-            newScrollPosition = currentScrollLeft - movementWidth;
+        if (actualMenuSelectorIndex - 1 >= 0) {
             actualMenuSelectorIndex--;
         } else {
-            newScrollPosition = widthScroll - ulSelector.offsetWidth;
-            actualMenuSelectorIndex = Math.floor(widthScroll / movementWidth);
+            actualMenuSelectorIndex = (data.length / itemsInSelector) - 1;
         }
     }
+
     ulSelector.scrollTo({
-        left: newScrollPosition,
+        left: getNewScrollPosition(),
         behavior: "smooth",
     });
 
     return {
-        changeImage: () =>
+        changeSelectedImage: () =>
             changeSelectedImage(
                 (actualMenuSelectorIndex + 1) * itemsInSelector -
                     (direction === "right" ? 3 : 1)
@@ -84,9 +77,9 @@ const moveSelector = ({ direction, indexElement = undefined }) => {
 };
 
 const moveLeftSelector = () =>
-    moveSelector({ direction: "left" }).changeImage();
+    moveSelector({ direction: "left" }).changeSelectedImage();
 const moveRightSelector = () =>
-    moveSelector({ direction: "right" }).changeImage();
+    moveSelector({ direction: "right" }).changeSelectedImage();
 
 btnSelectorLeft.addEventListener("click", moveLeftSelector);
 btnSelectorRight.addEventListener("click", moveRightSelector);
