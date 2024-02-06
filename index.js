@@ -90,7 +90,6 @@ btnSelectorRight.addEventListener("click", moveRightSelector);
 // Functions for move the main image
 
 const changeSelectedImage = index => {
-    clearInterval(interval);
     const element = data[index];
 
     selectedImage.src = URL + element.image.src;
@@ -141,7 +140,7 @@ const startInterval = () => {
 
 const resetInterval = () => {
     btnPauseImage.children[0].alt = "Stop";
-    btnPauseImage.children[0].src = "/images/svg/stop.svg";
+    btnPauseImage.children[0].src = "./images/svg/stop.svg";
     stopInterval();
     interval = setInterval(moveRightImage, intervalTimeInMilliseconds);
 };
@@ -149,11 +148,11 @@ const resetInterval = () => {
 btnPauseImage.addEventListener("click", () => {
     if (interval) {
         btnPauseImage.children[0].alt = "Play";
-        btnPauseImage.children[0].src = "/images/svg/play.svg";
+        btnPauseImage.children[0].src = "./images/svg/play.svg";
         stopInterval();
     } else {
         btnPauseImage.children[0].alt = "Stop";
-        btnPauseImage.children[0].src = "/images/svg/stop.svg";
+        btnPauseImage.children[0].src = "./images/svg/stop.svg";
         startInterval();
     }
 });
