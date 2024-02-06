@@ -38,6 +38,8 @@ const btnSelectorRight = document.getElementById("btnSelectorRight");
 const btnLeftImage = document.getElementById("btnLeftImage");
 const btnRightImage = document.getElementById("btnRightImage");
 
+const btnRandomImage = document.getElementById("btnRandomImage");
+
 // Functions for move the selector
 const getNewScrollPosition = () => {
     const movementWidth =
@@ -58,7 +60,7 @@ const moveSelector = ({ direction, indexElement = -1 }) => {
         if (actualMenuSelectorIndex - 1 >= 0) {
             actualMenuSelectorIndex--;
         } else {
-            actualMenuSelectorIndex = (data.length / itemsInSelector) - 1;
+            actualMenuSelectorIndex = data.length / itemsInSelector - 1;
         }
     }
 
@@ -127,6 +129,14 @@ const moveRightImage = () => {
 btnLeftImage.addEventListener("click", moveLeftImage);
 btnRightImage.addEventListener("click", moveRightImage);
 
+const changeToRandomImage = () => {
+    const indexElement = Math.floor(Math.random() * data.length);
+    changeSelectedImage(indexElement);
+    moveSelector({ indexElement });
+};
+
+btnRandomImage.addEventListener("click", changeToRandomImage);
+
 // Functions for generate the selectors
 
 const createSelectorImage = (element, index) => {
@@ -161,12 +171,13 @@ const printImages = data => {
     data.forEach((element, index) => {
         createSelectorImage(element, index);
     });
-    document.documentElement.style.setProperty('--elements', data.length);
-    document.documentElement.style.setProperty('--itemsInSelector', itemsInSelector);
-    const firstImageIndex = Math.floor(Math.random() * data.length);
-    changeSelectedImage(firstImageIndex);
+    document.documentElement.style.setProperty("--elements", data.length);
+    document.documentElement.style.setProperty(
+        "--itemsInSelector",
+        itemsInSelector
+    );
+    changeToRandomImage();
     selectedImageTitle.classList.add("selectedImageTitle");
-    moveSelector({ indexElement: firstImageIndex });
 };
 
 fetchData().then(response => {
