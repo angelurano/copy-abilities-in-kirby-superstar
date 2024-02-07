@@ -13,16 +13,16 @@ const fetchData = async () => {
 };
 
 // Variables
+const data = await fetchData();
 
-let selectorImages = {};
-let data;
+const ITEMS_IN_SELECTOR = 3;
+const INTERVAL_TIME_MS = 3000;
 
-let actualImageIndex = 0;
-const itemsInSelector = 3;
-let actualMenuSelectorIndex = 0;
+const selectorImages = {};
+
+let actualImageIndex = -1;
+let actualMenuSelectorIndex = -1;
 let interval;
-
-const intervalTimeInMilliseconds = 10000;
 
 // DOM elements
 
@@ -41,27 +41,49 @@ const btnRightImage = document.getElementById("btnRightImage");
 const btnPauseImage = document.getElementById("btnPauseImage");
 const btnRandomImage = document.getElementById("btnRandomImage");
 
-// Functions for move the selector
-const getNewScrollPosition = () => {
-    const movementWidth =
-        (ulSelector.offsetWidth / itemsInSelector) * itemsInSelector;
-    return actualMenuSelectorIndex * movementWidth - 1;
-};
+// Listeners
+btnSelectorLeft.addEventListener("click", moveLeftSelector);
+btnSelectorRight.addEventListener("click", moveRightSelector);
+btnLeftImage.addEventListener("click", moveLeftImage);
+btnRightImage.addEventListener("click", moveRightImage);
+btnRandomImage.addEventListener("click", changeToRandomImage);
+btnPauseImage.addEventListener("click", () => {
+    if (interval) {
+        stopInterval();
+    } else {
+        moveRightImage();
+        startInterval();
+    }
+});
 
-const moveSelector = ({ direction, indexElement = -1 }) => {
+// Print all the images
+
+printImages(data);
+
+// Functions for move the selector
+
+function getNewScrollPosition() {
+    return actualMenuSelectorIndex * ulSelector.offsetWidth - 1;
+}
+
+const DIRECTIONS = {
+    right: "right",
+    left: "left",
+};
+function moveSelector({ direction, indexElement = -1 }) {
     if (indexElement !== -1) {
-        actualMenuSelectorIndex = Math.floor(indexElement / itemsInSelector);
-    } else if (direction === "right") {
-        if (actualMenuSelectorIndex + 1 < data.length / itemsInSelector) {
+        actualMenuSelectorIndex = Math.floor(indexElement / ITEMS_IN_SELECTOR);
+    } else if (direction === DIRECTIONS.right) {
+        if (actualMenuSelectorIndex + 1 < data.length / ITEMS_IN_SELECTOR) {
             actualMenuSelectorIndex++;
         } else {
             actualMenuSelectorIndex = 0;
         }
-    } else if (direction === "left") {
+    } else if (direction === DIRECTIONS.left) {
         if (actualMenuSelectorIndex - 1 >= 0) {
             actualMenuSelectorIndex--;
         } else {
-            actualMenuSelectorIndex = data.length / itemsInSelector - 1;
+            actualMenuSelectorIndex = data.length / ITEMS_IN_SELECTOR - 1;
         }
     }
 
@@ -71,112 +93,111 @@ const moveSelector = ({ direction, indexElement = -1 }) => {
     });
 
     return {
-        changeSelectedImage: () =>
+        changeSelectedImage: () => {
+            const newDirection = direction === DIRECTIONS.right ? 3 : 1;
             changeSelectedImage(
-                (actualMenuSelectorIndex + 1) * itemsInSelector -
-                    (direction === "right" ? 3 : 1)
-            ),
+                (actualMenuSelectorIndex + 1) * ITEMS_IN_SELECTOR - newDirection
+            );
+        },
     };
-};
+}
 
-const moveLeftSelector = () =>
-    moveSelector({ direction: "left" }).changeSelectedImage();
-const moveRightSelector = () =>
-    moveSelector({ direction: "right" }).changeSelectedImage();
+function moveRightSelector() {
+    moveSelector({ direction: DIRECTIONS.right }).changeSelectedImage();
+}
 
-btnSelectorLeft.addEventListener("click", moveLeftSelector);
-btnSelectorRight.addEventListener("click", moveRightSelector);
+function moveLeftSelector() {
+    moveSelector({ direction: DIRECTIONS.left }).changeSelectedImage();
+}
 
 // Functions for move the main image
 
-const changeSelectedImage = index => {
-    const element = data[index];
+function changeSelectedImage(index) {
+    const { name, image, description } = data[index];
+    const { src, game } = image;
 
-    selectedImage.src = URL + element.image.src;
+    const newTitle = `Kirby  ${name} seleccionado, de ${game}`;
 
-    const text = `Kirby  ${element.name} seleccionado, de ${element.image.game}`;
-    selectedImage.alt = text;
-    selectedImage.title = text;
-    selectedImageTitle.textContent = element.description;
+    document.title = `Kirby ${name}`;
 
-    selectorImages[actualImageIndex].classList.remove("selectedInSelector");
+    selectedImage.src = URL + src;
+
+    selectedImage.alt = newTitle;
+    selectedImage.title = newTitle;
+    selectedImageTitle.textContent = description;
+
+    selectorImages[actualImageIndex]?.classList.remove("selectedInSelector");
     actualImageIndex = index;
-    selectorImages[actualImageIndex].classList.add("selectedInSelector");
-    resetInterval();
-};
+    selectorImages[actualImageIndex]?.classList.add("selectedInSelector");
+    startInterval();
+}
 
-const moveLeftImage = () => {
-    changeSelectedImage(
-        actualImageIndex - 1 < 0 ? data.length - 1 : actualImageIndex - 1
-    );
-    if (
-        (actualImageIndex + 1) % itemsInSelector === 0 ||
-        actualImageIndex === data.length - 1
-    ) {
-        moveSelector({ direction: "left" });
+function moveLeftImage() {
+    const prevImageIndex = actualImageIndex - 1;
+    const lastImageIndex = data.length - 1;
+
+    changeSelectedImage(prevImageIndex >= 0 ? prevImageIndex : lastImageIndex);
+
+    const nextImageIndex = actualImageIndex + 1;
+    const isNextImageLast = nextImageIndex % ITEMS_IN_SELECTOR === 0;
+
+    if (isNextImageLast || actualImageIndex === lastImageIndex) {
+        moveSelector({ direction: DIRECTIONS.left });
     }
-};
+}
 
-const moveRightImage = () => {
+function moveRightImage() {
+    const nextImageIndex = actualImageIndex + 1;
+    const firstImageIndex = 0;
+
     changeSelectedImage(
-        actualImageIndex + 1 >= data.length ? 0 : actualImageIndex + 1
+        nextImageIndex >= data.length ? firstImageIndex : nextImageIndex
     );
-    if (actualImageIndex % itemsInSelector === 0) {
-        moveSelector({ direction: "right" });
+
+    const isLastImage = actualImageIndex % ITEMS_IN_SELECTOR === 0;
+
+    if (isLastImage) {
+        moveSelector({ direction: DIRECTIONS.right });
     }
-};
+}
 
-btnLeftImage.addEventListener("click", moveLeftImage);
-btnRightImage.addEventListener("click", moveRightImage);
-
-const stopInterval = () => {
+function stopInterval() {
     clearInterval(interval);
     interval = null;
-};
+    btnPauseImage.children[0].alt = "Play";
+    btnPauseImage.children[0].src = "./images/svg/play.svg";
+}
 
-const startInterval = () => {
-    moveRightImage();
-};
-
-const resetInterval = () => {
+function startInterval() {
+    if (interval) {
+        clearInterval(interval);
+    }
+    interval = setInterval(moveRightImage, INTERVAL_TIME_MS);
     btnPauseImage.children[0].alt = "Stop";
     btnPauseImage.children[0].src = "./images/svg/stop.svg";
-    stopInterval();
-    interval = setInterval(moveRightImage, intervalTimeInMilliseconds);
-};
+}
 
-btnPauseImage.addEventListener("click", () => {
-    if (interval) {
-        btnPauseImage.children[0].alt = "Play";
-        btnPauseImage.children[0].src = "./images/svg/play.svg";
-        stopInterval();
-    } else {
-        btnPauseImage.children[0].alt = "Stop";
-        btnPauseImage.children[0].src = "./images/svg/stop.svg";
-        startInterval();
-    }
-});
-
-const changeToRandomImage = () => {
+function changeToRandomImage() {
     const indexElement = Math.floor(Math.random() * data.length);
     changeSelectedImage(indexElement);
     moveSelector({ indexElement });
-};
-
-btnRandomImage.addEventListener("click", changeToRandomImage);
+}
 
 // Functions for generate the selectors
 
-const createSelectorImage = (element, index) => {
+function createSelectorImage(element, index) {
     const li = document.createElement("li");
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const p = document.createElement("p");
 
-    p.textContent = element.name;
+    const { name, image } = element;
 
-    img.src = URL + element.image.src;
-    const text = `Kirby ${element.name} de ${element.image.game}`;
+    const text = `Kirby ${name} de ${image.game}`;
+
+    p.textContent = name;
+
+    img.src = URL + image.src;
     img.alt = text;
     img.title = text;
 
@@ -193,22 +214,17 @@ const createSelectorImage = (element, index) => {
         changeSelectedImage(index);
     });
     return li;
-};
+}
 
-const printImages = data => {
+function printImages(data) {
     data.forEach((element, index) => {
         createSelectorImage(element, index);
     });
     document.documentElement.style.setProperty("--elements", data.length);
     document.documentElement.style.setProperty(
         "--itemsInSelector",
-        itemsInSelector
+        ITEMS_IN_SELECTOR
     );
     changeToRandomImage();
     selectedImageTitle.classList.add("selectedImageTitle");
-};
-
-fetchData().then(response => {
-    data = response;
-    printImages(data);
-});
+}
