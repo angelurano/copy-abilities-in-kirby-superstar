@@ -16,7 +16,7 @@ const fetchData = async () => {
 const data = await fetchData();
 
 const ITEMS_IN_SELECTOR = 3;
-const INTERVAL_TIME_MS = 3000;
+const INTERVAL_TIME_MS = 9000;
 
 const selectorImages = {};
 
