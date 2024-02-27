@@ -42,6 +42,18 @@ const btnPauseImage = document.getElementById("btnPauseImage");
 const btnRandomImage = document.getElementById("btnRandomImage");
 
 // Listeners
+document.addEventListener("keydown", event => {
+    const isMetaKey = event.metaKey || event.ctrlKey;
+    if (isMetaKey && event.key === "ArrowRight") {
+        moveRightSelector();
+    } else if (isMetaKey && event.key === "ArrowLeft") {
+        moveLeftSelector();
+    } else if (event.key === "ArrowRight") {
+        moveRightImage();
+    } else if (event.key === "ArrowLeft") {
+        moveLeftImage();
+    }
+});
 btnSelectorLeft.addEventListener("click", moveLeftSelector);
 btnSelectorRight.addEventListener("click", moveRightSelector);
 btnLeftImage.addEventListener("click", moveLeftImage);
