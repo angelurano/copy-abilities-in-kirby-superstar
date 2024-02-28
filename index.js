@@ -190,7 +190,10 @@ function startInterval() {
 }
 
 function changeToRandomImage() {
-    const indexElement = Math.floor(Math.random() * data.length);
+    let indexElement = actualImageIndex;
+    while (indexElement === actualImageIndex) {
+        indexElement = Math.floor(Math.random() * data.length);
+    }
     changeSelectedImage(indexElement);
     moveSelector({ indexElement });
 }
