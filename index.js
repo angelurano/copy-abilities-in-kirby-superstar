@@ -1,5 +1,5 @@
 // Fetch data
-const URL = "https://paman00.github.io/copy-abilities-in-kirby-superstar";
+const URL = window.location.href;
 const DATA_URL = `${URL}/lib/data.json`;
 
 const fetchData = async () => {
